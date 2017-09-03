@@ -1,4 +1,9 @@
 require 'nokogiri'
+require 'httparty'
+
+#page = HTTParty.get('https://www.realclearpolitics.com/epolls/other/president_trump_job_approval-6179.html')
+#parsed = Nokogiri::HTML(page)
+#parsed.css('tr.rcpAvg').to_s
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
@@ -6,7 +11,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @user = User.new
     @users = User.all
+    @my_user = User.first
+    @page = HTTParty.get('https://www.realclearpolitics.com/epolls/other/president_trump_job_approval-6179.html')
+    @parsed = Nokogiri::HTML(@page)
+    #@parsed.css('tr.rcpAvg').to_s
   end
 
   # GET /users/1

@@ -24,6 +24,19 @@
   </tbody>
 </table>
 
+<br/>
+
+<p><%=@parsed.css('tr.rcpAvg').to_s%></p>
+
 <br>
 
 <%= link_to 'New User', new_user_path %>
+
+<br/><br/><br/>
+
+<!--here is where we want our app to monitor some metrics and when a new survey is released, the app triggers an email-->
+
+<%while true do%>
+  <%=ExampleMailer.sample_email(@my_user).deliver%>
+<%end%>
+
