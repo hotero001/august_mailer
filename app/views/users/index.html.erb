@@ -26,7 +26,9 @@
 
 <br/>
 
-<p><%=@parsed.css('tr.rcpAvg').to_s%></p>
+<b>DONALD TRUMP'S CURRENT APPROVAL RATING ON REALCLEARPOLITICS.COM IS:</b>
+<br/>
+<p><%=@approval_rate%></p>
 
 <br>
 
@@ -36,7 +38,13 @@
 
 <!--here is where we want our app to monitor some metrics and when a new survey is released, the app triggers an email-->
 
-<%while true do%>
-  <%=ExampleMailer.sample_email(@my_user).deliver%>
+<!--this code below works. it started sending constant emails to me -->
+<%if @approval_rate != 39.9%>
+  <%2.times do%>
+    <%=ExampleMailer.sample_email(@my_user).deliver%>
+  <%end%>
+<%else%>
+  <%5.times do%>
+    <%=ExampleMailer.sample_email(@my_user).deliver%>
+  <%end%>
 <%end%>
-

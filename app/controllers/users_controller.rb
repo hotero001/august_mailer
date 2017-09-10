@@ -16,6 +16,13 @@ class UsersController < ApplicationController
     @my_user = User.first
     @page = HTTParty.get('https://www.realclearpolitics.com/epolls/other/president_trump_job_approval-6179.html')
     @parsed = Nokogiri::HTML(@page)
+    @string_form = @parsed.css('tr.rcpAvg').to_s
+    a = "sample"
+    b = "spread"
+    @substring_of_string = @string_form[/#{a}(.*?)#{b}/m, 1]
+    x = "<td>"
+    y = "</td>"
+    @approval_rate = @substring_of_string[/#{x}(.*?)#{y}/m, 1].to_f
     #@parsed.css('tr.rcpAvg').to_s
   end
 
