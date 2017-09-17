@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @array_of_previous_approval_rates = []
     @user = User.new
     @users = User.all
     @my_user = User.first
@@ -26,6 +27,11 @@ class UsersController < ApplicationController
     #@parsed.css('tr.rcpAvg').to_s
   end
 
+  def append_to_array(appendage)
+    @array_of_previous_approval_rates = []
+    @array_of_previous_approval_rates << appendage
+  end
+  
   # GET /users/1
   # GET /users/1.json
   def show

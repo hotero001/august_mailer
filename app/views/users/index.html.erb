@@ -30,10 +30,23 @@
 <br/>
 <p><%=@approval_rate%></p>
 
+<p><%=@array_of_previous_approval_rates.class%></p>
+
+<br/>
+<b>To verify the approval rating, click on the link below</b>
+<br/><a href='https://www.realclearpolitics.com/epolls/other/president_trump_job_approval-6179.html'>RCP Donald Trump approval rate</a>
+
 <br>
 
 <%= link_to 'New User', new_user_path %>
 
+<!--other option is to append the approval rate every day at some time in order to later reference it and compare it to the day's current approval rate-->
+<!--add button here that when clicked, saves the current approval rate to the array in the users controller, append_to_array(appendage) method-->
+<%while true do%>
+  <%=if Time.now.to_i = 1505616021 + 86400 %>
+    <%@array_of_previous_approval_rates << @approval_rate%>
+  <%end%>
+<%end%>
 <br/><br/><br/>
 
 <!--here is where we want our app to monitor some metrics and when a new survey is released, the app triggers an email-->
