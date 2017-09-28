@@ -16,14 +16,22 @@ class UsersController < ApplicationController
     @users = User.all
     @my_user = User.first
     @page = HTTParty.get('https://www.realclearpolitics.com/epolls/other/president_trump_job_approval-6179.html')
+    @page2 = HTTParty.get('http://fast-hamlet-30185.herokuapp.com/')
     @parsed = Nokogiri::HTML(@page)
+    @parsed2 = Nokogiri::HTML(@page2)
     @string_form = @parsed.css('tr.rcpAvg').to_s
+    @string_form2 = @parsed2.css('p').to_s
+    @string_form2_length = @string_form2.length
+    @string_form2_int = @string_form2[22..25].to_f
     a = "sample"
     b = "spread"
     @substring_of_string = @string_form[/#{a}(.*?)#{b}/m, 1]
+    @substring_of_string2 = @string_form2[/#{a}(.*?)#{b}/m, 1]
     x = "<td>"
     y = "</td>"
     @approval_rate = @substring_of_string[/#{x}(.*?)#{y}/m, 1].to_f
+    @logging_time = Time.now.to_i
+    @day_in_seconds = 86400
     #@parsed.css('tr.rcpAvg').to_s
   end
 
